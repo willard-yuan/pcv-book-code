@@ -3,7 +3,7 @@ from PCV.tools import graphcut
 from PIL import Image
 from pylab import *
 
-im = array(Image.open("F:\\dropbox\Dropbox\\translation\\pcv-notebook\\data\\empire.jpg"))
+im = array(Image.open("../data/empire.jpg"))
 im = imresize(im, 0.07)
 size = im.shape[:2]
 
