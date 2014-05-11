@@ -15,7 +15,7 @@ This is the image search demo in Section 7.6.
 class SearchDemo:
 
     def __init__(self):
-        # load list of images
+        # 载入图像列表
         self.path = './first500/'
         #self.path = 'D:/python_web/isoutu/first500/'
         self.imlist = [os.path.join(self.path,f) for f in os.listdir(self.path) if f.endswith('.jpg')]
@@ -24,12 +24,12 @@ class SearchDemo:
         self.nbr_images = len(self.imlist)
         self.ndx = range(self.nbr_images)
 
-        # load vocabulary
+        # 载入词汇
         f = open('./first500/vocabulary.pkl', 'rb')
         self.voc = pickle.load(f)
         f.close()
 
-        # set max number of results to show
+        # 显示搜索返回的图像数
         self.maxres = 49
 
         # header and footer html
@@ -56,14 +56,16 @@ class SearchDemo:
             """
         if query:
             # query the database and get top images
+            #查询数据库，并获取前面的图像
             res = self.src.query(query)[:self.maxres]
             for dist, ndx in res:
                 imname = self.src.get_filename(ndx)
                 html += "<a href='?query="+imname+"'>"
                 html += "<img src='"+imname+"' width='200' />"
                 html += "</a>"
-        else:
             # show random selection if no query
+            # 如果没有查询图像则随机显示一些图像
+        else:
             random.shuffle(self.ndx)
             for i in self.ndx[:self.maxres]:
                 imname = self.imlist[i]
