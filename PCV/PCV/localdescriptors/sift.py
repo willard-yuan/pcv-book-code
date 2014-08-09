@@ -5,18 +5,18 @@ from pylab import *
 
 
 def process_image(imagename,resultname,params="--edge-thresh 10 --peak-thresh 5"):
-	""" process an image and save the results in a file"""
-
-	if imagename[-3:] != 'pgm':
-		#create a pgm file
-		im = Image.open(imagename).convert('L')
-		im.save('tmp.pgm')
-		imagename = 'tmp.pgm'
-
-	cmmd = str("D:\mltools\win32vlfeat\sift.exe "+imagename+" --output="+resultname+
+    """ process an image and save the results in a file"""
+    path = os.path.abspath(os.path.join(os.path.dirname("__file__"),os.path.pardir))
+    path = path+"\\utils\\win32vlfeat\\sift.exe "
+    if imagename[-3:] != 'pgm':
+	    #create a pgm file
+		 im = Image.open(imagename).convert('L')
+		 im.save('tmp.pgm')
+		 imagename = 'tmp.pgm'
+    cmmd = str(path+imagename+" --output="+resultname+
 				" "+params)
-	os.system(cmmd)
-	print 'processed', imagename, 'to', resultname
+    os.system(cmmd)
+    print 'processed', imagename, 'to', resultname
 
 
 def read_features_from_file(filename):
